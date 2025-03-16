@@ -3,8 +3,8 @@ import { features, stats } from "@/constants/index";
 
 export default function Home() {
   return (
-    <section className="relative px-6 pt-32">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative px-6 pt-32 min-h-screen max-w-screen overflow-x-hidden">
+      <div className="mx-auto max-w-5xl relative z-20">
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex h-9 items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/10 px-4 text-sm text-sky-400 animate-pulse">
             <svg
@@ -107,6 +107,11 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* grid background */}
+      <div className="h-full w-full bg-black  bg-grid-white/[0.1]  absolute top-0 left-0 z-10 flex items-center justify-center">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
     </section>
   );

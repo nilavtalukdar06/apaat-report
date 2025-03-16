@@ -37,7 +37,7 @@ export default function Navbar() {
                   </svg>
                 </div>
                 <span className="text-lg font-semibold text-white max-[400px]:hidden">
-                  SafeReport
+                  ApaatReport
                 </span>
               </div>
             </div>
