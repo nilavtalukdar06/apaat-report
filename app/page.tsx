@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { features } from "@/constants/index";
+import { features, stats } from "@/constants/index";
 
 export default function Home() {
   return (
@@ -67,7 +67,7 @@ export default function Home() {
           {features.map((item, index) => (
             <div
               key={index}
-              className="w-full group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80"
+              className="w-full group relative overflow-hidden rounded-xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-sky-500/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
@@ -84,6 +84,28 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Stats */}
+        <div className="mt-40 bg-zinc-900 rounded-xl p-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 place-items-center">
+            {stats.map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl font-bold text-white">
+                  {item.value}
+                </div>
+                <div className="mt-1 text-sm text-zinc-400">{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="pt-40 py-20 justify-center flex">
+          <div className="inline-flex items-center gap-3 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-5 py-2 text-sm text-zinc-400 animate-pulse">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <p className="text-emerald-500">
+              Trusted by Law Enforcement Nationwide
+            </p>
+          </div>
         </div>
       </div>
     </section>
