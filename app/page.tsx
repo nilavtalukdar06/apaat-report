@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { features } from "@/constants/index";
 
 export default function Home() {
   return (
@@ -55,11 +56,34 @@ export default function Home() {
               </button>
             </Link>
             <Link href={"/how-it-works"}>
-              <button className="flex h-12 items-center justify-center gap-2 rounded-xl bg-white/5 px-8 text-sm font-medium text-white ring-1 ring-inset ring-white/10 transition-all hover:bg-white/10">
+              <button className="flex h-12 items-center justify-center gap-2 rounded-xl bg-white/5 px-8 text-sm font-medium text-white ring-1 w-full ring-inset ring-white/10 transition-all hover:bg-white/10">
                 How it Works
               </button>
             </Link>
           </div>
+        </div>
+
+        <div className="mt-40 grid gap-6 md:grid-cols-2 lg:grid-cols-3 place-items-center">
+          {features.map((item, index) => (
+            <div
+              key={index}
+              className="w-full group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-sky-500/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+              <div className="relative">
+                <div className="mb-5 inline-flex rounded-xl bg-sky-500/10 p-3">
+                  {item.icon}
+                </div>
+                <h3 className="mb-3 text-lg font-medium text-white">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
