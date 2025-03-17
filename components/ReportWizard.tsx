@@ -1,13 +1,13 @@
 "use client";
 
-import ReportFrom from "./ReportFrom";
+import ReportForm from "./ReportForm";
 import { useState } from "react";
 
 export default function ReportWizard() {
   const [step, setStep] = useState(1);
   const [reportData, setReportData] = useState<any>(null);
 
-  const handleComplete = (data: any) => {
+  const handleComplete = async (data: any) => {
     setReportData({ ...reportData, ...data });
 
     if (step === 3) {
@@ -19,7 +19,7 @@ export default function ReportWizard() {
 
   return (
     <section className="rounded-xl bg-zinc-900 p-8">
-      {step === 1 && <ReportFrom />}
+      {step === 1 && <ReportForm onComplete={handleComplete} />}
     </section>
   );
 }
