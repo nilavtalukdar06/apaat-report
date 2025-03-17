@@ -1,5 +1,7 @@
 "use client";
 
+import ReportForm from "@/components/ReportForm";
+
 export default function SubmitReport() {
   return (
     <main className="relative min-h-screen bg-black selection:bg-sky-500/20 overflow-hidden">
@@ -39,7 +41,9 @@ export default function SubmitReport() {
             </p>
           </div>
 
-          <div className="mt-16 bg-zinc-900/50 rounded-xl border border-white/5 p-6"></div>
+          <div className="mt-16 bg-zinc-900/50 rounded-xl border border-white/5 p-6">
+            <ReportForm />
+          </div>
         </div>
       </div>
     </main>
