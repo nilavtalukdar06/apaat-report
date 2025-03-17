@@ -1,6 +1,4 @@
-"use client";
-
-import ReportForm from "@/components/ReportForm";
+import ReportWizard from "@/components/ReportWizard";
 
 export default function SubmitReport() {
   return (
@@ -41,8 +39,8 @@ export default function SubmitReport() {
             </p>
           </div>
 
-          <div className="mt-16 bg-zinc-900/50 rounded-xl border border-white/5 p-6">
-            <ReportForm />
+          <div className="mt-16 bg-zinc-900/50 rounded-xl border border-white/5 p-4">
+            <ReportWizard />
           </div>
         </div>
       </div>
