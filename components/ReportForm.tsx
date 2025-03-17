@@ -102,6 +102,83 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
           </div>
         </button>
       </div>
+
+      {/* Image upload */}
+      <div className="group relative">
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
+          id="image-upload"
+        />
+        <label
+          htmlFor="image-upload"
+          className="block w-full p-8 border-2 border-dashed border-zinc-700 rounded-xl 
+                   hover:border-sky-500/50 hover:bg-sky-500/5 transition-all duration-200
+                   cursor-pointer text-center"
+        >
+          {image ? (
+            <div className="space-y-4">
+              <div className="w-full h-48 relative rounded-lg overflow-hidden">
+                <img
+                  src={image}
+                  alt="preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-sm text-zinc-400">Click to change image</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <svg
+                className="mx-auto h-12 w-12 text-zinc-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <p className="text-sm text-zinc-400">
+                Drop an image here or click to upload
+              </p>
+            </div>
+          )}
+        </label>
+        {isAnalyzing && (
+          <div className="absolute inset-0 bg-black/50 rounded-xl flex items-center justify-center">
+            <div className="flex items-center space-x-3">
+              <svg
+                className="animate-spin h-5 w-5 text-sky-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <span className="text-sky-500 font-medium">
+                Analyzing image...
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
     </form>
   );
 };
