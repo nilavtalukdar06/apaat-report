@@ -39,7 +39,7 @@ export default function SubmitReport() {
             </p>
           </div>
 
-          <div className="mt-16 bg-zinc-900/50 rounded-xl border border-white/5 p-4">
+          <div className="my-16 bg-zinc-900/50 rounded-xl border border-white/5 p-4">
             <ReportWizard />
           </div>
         </div>

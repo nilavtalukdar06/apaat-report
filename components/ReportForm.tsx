@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import LocationInput from "./LocationInput";
 
 const REPORT_TYPES = [
   "Theft",
@@ -179,6 +180,34 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
           </div>
         )}
       </div>
+
+      <div>
+        <label className="block text-sm font-medium text-zinc-400 mb-2">
+          Incident Type
+        </label>
+        <select
+          value={formData.specificType}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, specificType: e.target.value }))
+          }
+          className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
+          text-white transition-colors duration-200
+          focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+          required
+        >
+          <option value="">Select type</option>
+          {REPORT_TYPES.map((item, index) => {
+            return (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      {/* location input */}
+      <LocationInput />
     </form>
   );
 };
