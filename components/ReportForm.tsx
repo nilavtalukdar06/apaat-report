@@ -207,7 +207,34 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
       </div>
 
       {/* location input */}
-      <LocationInput />
+      <LocationInput
+        value={formData.location}
+        onChange={(value) =>
+          setFormData((prev) => ({ ...prev, location: value }))
+        }
+        onCoordinatesChange={(lat, lng) =>
+          setCoordinates((prev) => ({ ...prev, latitude: lat, longitude: lng }))
+        }
+      />
+
+      {/* Title */}
+      <div>
+        <label className="block text-sm font-medium text-zinc-400 mb-2">
+          Report Title
+        </label>
+        <input
+          type="text"
+          value={formData.title}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, title: e.target.value }))
+          }
+          placeholder="Enter the title of the report"
+          className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
+                   text-white transition-colors duration-200
+                   focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+          required
+        />
+      </div>
     </form>
   );
 };
