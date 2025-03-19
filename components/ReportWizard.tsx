@@ -19,7 +19,7 @@ export default function ReportWizard() {
   };
 
   return (
-    <section className="rounded-xl bg-zinc-900 p-8">
+    <section className="rounded-xl bg-zinc-900 p-4 sm:p-8">
       {step === 1 && <ReportForm onComplete={handleComplete} />}
       {step === 2 && (
         <ReportFormSubmission data={reportData} onComplete={handleComplete} />
