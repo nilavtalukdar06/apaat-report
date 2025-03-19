@@ -55,7 +55,7 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
       const Response = await fetch("/api/analyze-image", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ image: base64 }),
       });
@@ -80,10 +80,52 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
   const generateReportId = useCallback(() => {
     const timestamp = Date.now().toString();
     const randomBytes = uuidv4();
+
+    return randomBytes;
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    console.log(generateReportId());
+    try {
+      const reportData = {
+        reportId: generateReportId(),
+        type: formData.incidentType,
+        specificType: formData.specificType,
+        title: formData.title,
+        description: formData.description,
+        location: formData.location,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+        image: image,
+        status: "PENDING",
+      };
+
+      const response = await fetch("/api/reports/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reportData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit the report");
+      }
+
+      const result = await response.json();
+
+      onComplete(result);
+    } catch (error) {
+      console.error(`Error submitting form, error : ${error}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <form className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-8">
       <div className="grid grid-cols-2 gap-4">
         <button
           type="button"
@@ -154,6 +196,7 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
           type="file"
           accept="image/*"
           className="hidden"
+          onChange={handleImageUpload}
           id="image-upload"
         />
         <label
