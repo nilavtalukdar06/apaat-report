@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import LocationInput from "./LocationInput";
+import { v4 as uuidv4 } from "uuid";
 
 const REPORT_TYPES = [
   "Theft",
@@ -75,6 +76,11 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
       setIsAnalyzing(false);
     }
   };
+
+  const generateReportId = useCallback(() => {
+    const timestamp = Date.now().toString();
+    const randomBytes = uuidv4();
+  }, []);
 
   return (
     <form className="space-y-8">
