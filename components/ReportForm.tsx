@@ -38,6 +38,44 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsAnalyzing(true);
+
+    try {
+      const base64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+
+      const Response = await fetch("/api/analyze-image", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ image: base64 }),
+      });
+
+      const data = await Response.json();
+      if (data?.title && data?.description && data?.reportType) {
+        setFormData((prev) => ({
+          ...prev,
+          title: data.title,
+          description: data.description,
+          specificType: data.reportType,
+        }));
+        setImage(base64 as string);
+      }
+    } catch (error) {
+      console.error(`Error analyzing image, error : ${error}`);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <form className="space-y-8">
       <div className="grid grid-cols-2 gap-4">
