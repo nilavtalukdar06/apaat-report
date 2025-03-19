@@ -31,6 +31,8 @@ model Report {
     type        ReportType
     title       String
     description String
+    // Added image field to fix submission error since API sends an image
+    image       String?
     reportType  String
     location    String?
     latitude    Float?
