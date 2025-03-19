@@ -20,6 +20,7 @@ export default function ReportWizard() {
   return (
     <section className="rounded-xl bg-zinc-900 p-8">
       {step === 1 && <ReportForm onComplete={handleComplete} />}
+      {step === 2 && <></>}
     </section>
   );
 }
