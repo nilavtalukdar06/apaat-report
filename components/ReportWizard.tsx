@@ -2,6 +2,7 @@
 
 import ReportForm from "./ReportForm";
 import { useState } from "react";
+import ReportFormSubmission from "./ReportFormSubmission";
 
 export default function ReportWizard() {
   const [step, setStep] = useState(1);
@@ -20,7 +21,9 @@ export default function ReportWizard() {
   return (
     <section className="rounded-xl bg-zinc-900 p-8">
       {step === 1 && <ReportForm onComplete={handleComplete} />}
-      {step === 2 && <></>}
+      {step === 2 && (
+        <ReportFormSubmission data={reportData} onComplete={handleComplete} />
+      )}
     </section>
   );
 }
