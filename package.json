@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.8.0",
     "@google/generative-ai": "^0.24.0",
     "@mapbox/search-js-react": "^1.0.0",
     "@neondatabase/serverless": "^0.10.4",
     "@prisma/adapter-neon": "^6.5.0",
     "@prisma/client": "^6.5.0",
     "@tabler/icons-react": "^3.31.0",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",
