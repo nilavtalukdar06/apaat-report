@@ -89,8 +89,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+      <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
@@ -111,9 +111,9 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-20">
         <div className="mb-8 flex flex-wrap gap-4 items-center justify-between">
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-[500px]:flex-col">
             <select
               value={filter}
               onChange={(e) =>
@@ -156,7 +156,7 @@ export default function Dashboard() {
               key={report.id}
               className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all"
             >
-              <div className="flex justify-between items-start gap-6">
+              <div className="flex max-[500px]:flex-col justify-between items-start gap-6">
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center gap-3">
                     <h2 className="text-lg font-medium text-neutral-200">
@@ -228,6 +228,10 @@ export default function Dashboard() {
           )}
         </div>
       </main>
+
+      <div className="z-10 h-full w-full bg-black bg-grid-white/[0.1] absolute top-0 left-0 flex items-center justify-center">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
     </div>
   );
 }

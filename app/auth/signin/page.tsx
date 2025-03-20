@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link"; // <-- Added import
 
 export default function SignIn() {
   const router = useRouter();
@@ -36,8 +37,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-black flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 max-w-screen relative overflow-x-hidden">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-20">
         <h1 className="text-center text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-2">
           Welcome Back
         </h1>
@@ -46,7 +47,7 @@ export default function SignIn() {
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-20">
         <div className="bg-neutral-900/50 backdrop-blur-sm py-8 px-4 shadow-xl border border-neutral-800 rounded-xl sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
@@ -112,8 +113,19 @@ export default function SignIn() {
                 )}
               </button>
             </div>
+
+            {/* Added sign up line */}
+            <div className="mt-4 text-center text-zinc-400">
+              Not a user?{" "}
+              <Link href="/auth/signup">
+                <span className="text-blue-500 hover:underline">Sign up</span>
+              </Link>
+            </div>
           </form>
         </div>
+      </div>
+      <div className="h-full w-full bg-black bg-grid-white/[0.1] absolute top-0 left-0 z-10 flex items-center justify-center">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
     </div>
   );
