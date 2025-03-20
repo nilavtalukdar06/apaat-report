@@ -1,4 +1,5 @@
 //@ts-nocheck
+"use server"
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { ReportType } from "@prisma/client";
