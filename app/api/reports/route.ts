@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { ReportStatus, ReportType } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { options } from "@/lib/auth";
-
+export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession({ req, ...options });
