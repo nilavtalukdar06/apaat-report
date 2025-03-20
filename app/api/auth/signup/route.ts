@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const { email, password, name, role } = await request.json();

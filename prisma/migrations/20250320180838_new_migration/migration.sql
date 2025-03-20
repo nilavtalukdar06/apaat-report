@@ -14,6 +14,7 @@ CREATE TABLE "Report" (
     "type" "ReportType" NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "image" TEXT,
     "reportType" TEXT NOT NULL,
     "location" TEXT,
     "latitude" DOUBLE PRECISION,
