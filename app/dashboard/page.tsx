@@ -42,6 +42,7 @@ export default function Dashboard() {
     reportId: string,
     newStatus: ReportStatus
   ) => {
+    console.log(reportId, newStatus);
     try {
       const response = await fetch(`/api/reports/${reportId}`, {
         method: "PATCH",
@@ -52,6 +53,8 @@ export default function Dashboard() {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to update report status:", errorData);
         throw new Error("Failed to update report status");
       }
       fetchReports();
@@ -202,7 +205,7 @@ export default function Dashboard() {
                   value={report.status}
                   onChange={(e) =>
                     updateReportStatus(
-                      report.id,
+                      report.reportId,
                       e.target.value as ReportStatus
                     )
                   }

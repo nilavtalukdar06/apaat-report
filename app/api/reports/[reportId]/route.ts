@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
 export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: { reportId: string } }
 ) {
   try {
     const session = await getServerSession();
@@ -13,8 +13,17 @@ export async function PATCH(
     }
 
     const { status } = await request.json();
+
+    // Check if the report exists
+    const existingReport = await prisma.report.findUnique({
+      where: { reportId: params.reportId },
+    });
+    if (!existingReport) {
+      return NextResponse.json({ error: "Report not found" }, { status: 404 });
+    }
+
     const report = await prisma.report.update({
-      where: { id: params.id },
+      where: { reportId: params.reportId },
       data: { status },
     });
 
