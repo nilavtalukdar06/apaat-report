@@ -1,4 +1,16 @@
-import ReportWizard from "@/components/ReportWizard";
+"use client";
+
+export const dynamic = "force-dynamic";
+
+import dynamicComponent from "next/dynamic";
+
+// Load ReportWizard only on the client to avoid SSR errors
+const ReportWizard = dynamicComponent(
+  () => import("@/components/ReportWizard"),
+  {
+    ssr: false,
+  }
+);
 
 export default function SubmitReport() {
   return (
@@ -40,7 +52,7 @@ export default function SubmitReport() {
       </div>
 
       {/* Background */}
-      <div className="h-full w-full bg-black  bg-grid-white/[0.1]  absolute top-0 left-0 z-10 flex items-center justify-center">
+      <div className="h-full w-full bg-black  bg-grid-white/[0.1] absolute top-0 left-0 z-10 flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
     </main>
