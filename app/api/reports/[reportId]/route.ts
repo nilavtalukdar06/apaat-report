@@ -1,8 +1,6 @@
-"use server"
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-export const dynamic = "force-dynamic";
 export async function PATCH(
   request: Request,
   { params }: { params: { reportId: string } }
