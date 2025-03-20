@@ -2,24 +2,33 @@
 
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // Correct import
 import { Report, ReportStatus, ReportType } from "@prisma/client";
 import { signOut } from "next-auth/react";
 
 export default function Dashboard() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter(); // Initialize useRouter
   const [reports, setReports] = useState<Report[]>([]);
   const [filter, setFilter] = useState<ReportStatus | "ALL">("ALL");
   const [typeFilter, setTypeFilter] = useState<ReportType | "ALL">("ALL");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchReports();
-  }, []);
+    if (status === "unauthenticated") {
+      router.push("/auth/signin"); // Redirect if not authenticated
+    } else {
+      fetchReports();
+    }
+  }, [status]);
 
   const fetchReports = async () => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/reports");
+      if (!response.ok) {
+        throw new Error("Failed to fetch reports");
+      }
       const data = await response.json();
       setReports(data);
     } catch (error) {
@@ -42,9 +51,10 @@ export default function Dashboard() {
         body: JSON.stringify({ status: newStatus }),
       });
 
-      if (response.ok) {
-        fetchReports();
+      if (!response.ok) {
+        throw new Error("Failed to update report status");
       }
+      fetchReports();
     } catch (error) {
       console.error("Error updating report:", error);
     }
