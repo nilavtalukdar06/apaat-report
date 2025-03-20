@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Apaat Report
 
-## Getting Started
+Apaat Report is a Next.js application designed to allow users to report incidents with image analysis and geolocation support. The application processes image uploads using a custom API, generates unique report IDs, and manages report submissions.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Features
+
+- **Incident Reporting:** Submit reports with detailed information including title, description, location, and status.
+- **Image Analysis:** Upload images to automatically extract report details.
+- **Unique Report ID Generation:** Securely generate a unique identifier for each report using SHA-256 hashing.
+- **Geolocation Integration:** Capture latitude and longitude coordinates for accurate incident mapping.
+- **Next.js Framework:** Leverages Next.js for an optimized React experience with server-side capabilities.
+
+## Technology Stack
+
+- **Frontend:** Next.js, React, TypeScript
+- **Backend:** Node.js (API routes provided by Next.js)
+- **Image Processing:** Custom API endpoint for analyzing images
+- **Hashing & Security:** Node.js crypto module
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd apaat-report
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Environment Setup:**
+
+   Create a `.env.local` file in the root directory and add the necessary environment variables (e.g., API keys, database URIs):
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:3000/api
+   # add other environment variables as needed
+   ```
+
+## Usage
+
+1. **Development Server:**
+
+   Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
+
+2. **Building for Production:**
+
+   Build the application:
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+   Start the production server:
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+3. **Testing:**
+
+   To run any available tests, use your chosen command:
+   ```bash
+   npm test
+   # or
+   yarn test
+   ```
+
+## Deployment
+
+The easiest way to deploy the Next.js app is to use the [Vercel Platform](https://vercel.com/). For manual deployments or other platforms, check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
+
+## Project Structure
+
+```
+apaat-report/
+├── app/                    # Next.js pages and application logic
+├── components/             # React components (e.g., ReportForm.tsx)
+├── public/                 # Static assets
+├── .next/                 # Next.js build output (auto-generated)
+├── package.json            # Project configuration and scripts
+└── README.md               # This file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Contributions are welcome! Please fork the repository and create a pull request for any significant changes. For major changes, open an issue first to discuss what you would like to change.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
 
-## Learn More
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-To learn more about Next.js, take a look at the following resources:
+## Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For any questions, suggestions, or concerns, please reach out at [your-email@example.com](mailto:your-email@example.com).
