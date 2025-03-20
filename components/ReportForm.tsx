@@ -13,7 +13,7 @@ const REPORT_TYPES = [
   "Other",
 ] as const;
 
-type ReportType = "EMERGENCY" | "NON-EMERGENCY";
+type ReportType = "EMERGENCY" | "NON_EMERGENCY";
 
 interface ReportFormProps {
   onComplete: (data: any) => void;
@@ -166,10 +166,10 @@ const ReportForm = ({ onComplete }: ReportFormProps) => {
         <button
           type="button"
           onClick={() =>
-            setFormData((prev) => ({ ...prev, incidentType: "NON-EMERGENCY" }))
+            setFormData((prev) => ({ ...prev, incidentType: "NON_EMERGENCY" }))
           }
           className={`p-6 rounded-xl border-2 transition-all duration-200 ${
-            formData.incidentType === "NON-EMERGENCY"
+            formData.incidentType === "NON_EMERGENCY"
               ? "bg-orange-500/20 border-orange-500 shadow-lg shadow-orange-500/20"
               : "bg-zinc-900/50 border-zinc-800 hover:bg-orange-500/10 hover:border-orange-500/50"
           }`}
