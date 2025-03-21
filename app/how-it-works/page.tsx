@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HowItWorks() {
   return (
-    <main className="relative min-h-screen max-w-screen bg-black selection:bg-sky-500/20 overflow-hidden">
+    <section className="relative min-h-screen max-w-screen bg-black selection:bg-sky-500/20 overflow-hidden">
       <div className="relative px-6 pt-32 z-20">
         <div className="mx-auto max-w-5xl">
           {/* Header Section */}
@@ -263,6 +263,6 @@ export default function HowItWorks() {
       <div className="h-full w-full bg-black  bg-grid-white/[0.1]  absolute top-0 left-0 z-10 flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
-    </main>
+    </section>
   );
 }

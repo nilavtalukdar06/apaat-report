@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <main className="min-h-screen flex items-center justify-center max-w-screen relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center max-w-screen relative overflow-hidden">
       <div className="flex relative z-20 items-center space-x-3">
         <svg
           className="animate-spin h-5 w-5 text-sky-500"
@@ -28,6 +28,6 @@ export default function Loading() {
       <div className="h-full w-full bg-black  bg-grid-white/[0.1]  absolute top-0 left-0 z-10 flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
-    </main>
+    </section>
   );
 }

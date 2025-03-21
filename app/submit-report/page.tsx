@@ -14,7 +14,7 @@ const ReportWizard = dynamicComponent(
 
 export default function SubmitReport() {
   return (
-    <main className="relative min-h-screen max-w-screen selection:bg-sky-500/20 overflow-x-hidden">
+    <section className="relative min-h-screen max-w-screen selection:bg-sky-500/20 overflow-x-hidden">
       <div className="relative px-6 pt-32 z-20">
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center text-center">
@@ -55,6 +55,6 @@ export default function SubmitReport() {
       <div className="h-full w-full bg-black  bg-grid-white/[0.1] absolute top-0 left-0 z-10 flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
-    </main>
+    </section>
   );
 }
