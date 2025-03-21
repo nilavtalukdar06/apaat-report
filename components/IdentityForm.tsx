@@ -3,7 +3,8 @@
 import { useForm } from "react-hook-form";
 
 export default function ReportForm() {
-  const { register } = useForm();
+  const { register, watch } = useForm();
+  const reportIdValue = watch("reportId", "");
 
   return (
     <div className="w-full max-w-xl mx-auto">
@@ -76,8 +77,12 @@ export default function ReportForm() {
               {...register("reportId")}
               className="appearance-none block w-full px-3 py-2 border border-neutral-800 rounded-lg bg-neutral-900 placeholder-neutral-500 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
               placeholder="Enter report ID"
-              name="Report Id"
             />
+            {reportIdValue.length > 0 && reportIdValue.length !== 16 && (
+              <span className="text-red-500 text-sm">
+                Report Id is not valid
+              </span>
+            )}
           </div>
 
           <div>
@@ -103,6 +108,7 @@ export default function ReportForm() {
                    px-4 py-3.5 text-sm font-medium text-white shadow-lg
                    transition-all duration-200 hover:from-sky-400 hover:to-blue-500
                    disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={reportIdValue.length !== 16}
           >
             <span className="relative z-10">Submit Report</span>
             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/10"></div>
