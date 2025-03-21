@@ -93,7 +93,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center max-[460px]:flex-col max-[460px]:items-start gap-y-6">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
               Admin Dashboard
             </h1>
