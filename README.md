@@ -1,117 +1,217 @@
 # Apaat Report
 
-Apaat Report is a Next.js application designed to allow users to report incidents with image analysis and geolocation support. The application processes image uploads using a custom API, generates unique report IDs, and manages report submissions.
+A secure and anonymous incident reporting platform built with Next.js and TypeScript. It enables users to submit reports with image analysis and geolocation support while maintaining anonymity.
 
 ## Table of Contents
 
 - [Features](#features)
+- [System Architecture](#system-architecture)
 - [Technology Stack](#technology-stack)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Project Structure](#project-structure)
+- [Database Schema](#database-schema)
+- [Application Flow](#application-flow)
+- [API Documentation](#api-documentation)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Features
 
-- **Incident Reporting:** Submit reports with detailed information including title, description, location, and status.
-- **Image Analysis:** Upload images to automatically extract report details.
-- **Unique Report ID Generation:** Securely generate a unique identifier for each report using SHA-256 hashing.
-- **Geolocation Integration:** Capture latitude and longitude coordinates for accurate incident mapping.
-- **Next.js Framework:** Leverages Next.js for an optimized React experience with server-side capabilities.
+- 🔒 Anonymous Report Submission
+- 📍 Geolocation Integration
+- 🖼️ Image Analysis and Upload
+- 🔍 Report Tracking System
+- 👥 Role-based Access Control
+- 🔐 Secure Authentication
+- 📱 Responsive Design
+
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Client
+        UI[User Interface]
+        Forms[Report Forms]
+        Auth[Authentication]
+    end
+
+    subgraph Server
+        API[API Routes]
+        Handler[Request Handlers]
+        Middleware[Auth Middleware]
+    end
+
+    subgraph Database
+        PostgreSQL[(PostgreSQL)]
+        Prisma[Prisma ORM]
+    end
+
+    UI --> Forms
+    Forms --> API
+    Auth --> Middleware
+    API --> Handler
+    Handler --> Prisma
+    Prisma --> PostgreSQL
+```
+
+## Database Schema
+
+```mermaid
+erDiagram
+    User ||--o{ Report : creates
+    User {
+        string id
+        string email
+        string name
+        string password
+        enum role
+        datetime createdAt
+    }
+    Report {
+        string id
+        string reportId
+        string title
+        string description
+        string location
+        float latitude
+        float longitude
+        string image
+        enum status
+        enum type
+        datetime createdAt
+        datetime updatedAt
+    }
+```
+
+## Application Flow
+
+```mermaid
+classDiagram
+    class User {
+        +string email
+        +string password
+        +string name
+        +Role role
+        +login()
+        +logout()
+        +submitReport()
+    }
+
+    class Report {
+        +string reportId
+        +string title
+        +string description
+        +Location location
+        +Status status
+        +create()
+        +update()
+        +track()
+    }
+
+    class Auth {
+        +validateSession()
+        +checkPermissions()
+    }
+
+    User --> Report : submits
+    Report --> Auth : validates
+```
 
 ## Technology Stack
 
-- **Frontend:** Next.js, React, TypeScript
-- **Backend:** Node.js (API routes provided by Next.js)
-- **Image Processing:** Custom API endpoint for analyzing images
-- **Hashing & Security:** Node.js crypto module
+- **Frontend:**
+
+  - Next.js 15
+  - TypeScript
+  - TailwindCSS
+  - ShadCN UI
+  - NextAuth.js
+
+- **Backend:**
+
+  - Node.js
+  - Prisma ORM
+  - PostgreSQL
+  - NextAuth.js
+
+- **DevOps:**
+  - Vercel Deployment
+  - Docker
+  - Nginx
+  - GitHub Actions
+  - ESLint
+  - Prettier
 
 ## Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd apaat-report
-   ```
+
+```bash
+git clone https://github.com/yourusername/apaat-report.git
+cd apaat-report
+```
 
 2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
 
-3. **Environment Setup:**
+```bash
+npm install
+```
 
-   Create a `.env.local` file in the root directory and add the necessary environment variables (e.g., API keys, database URIs):
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:3000/api
-   # add other environment variables as needed
-   ```
+3. **Set up environment variables:**
+   Create a `.env.local` file:
 
-## Usage
+```env
+DATABASE_URL="postgresql://..."
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-1. **Development Server:**
+4. **Run database migrations:**
 
-   Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
+```bash
+npx prisma migrate dev
+```
 
-2. **Building for Production:**
+5. **Start the development server:**
 
-   Build the application:
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
-   Start the production server:
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
+```bash
+npm run dev
+```
 
-3. **Testing:**
+## API Documentation
 
-   To run any available tests, use your chosen command:
-   ```bash
-   npm test
-   # or
-   yarn test
-   ```
+### Authentication Routes
 
-## Deployment
+- `POST /api/auth/signup`: Create new user account
+- `POST /api/auth/[...nextauth]`: Handle authentication
 
-The easiest way to deploy the Next.js app is to use the [Vercel Platform](https://vercel.com/). For manual deployments or other platforms, check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
+### Report Routes
+
+- `POST /api/reports/create`: Submit new report
+- `GET /api/reports`: Get all reports
+- `GET /api/reports/:id`: Get specific report
+- `PUT /api/reports/:id`: Update report status
 
 ## Project Structure
 
 ```
 apaat-report/
-├── app/                    # Next.js pages and application logic
-├── components/             # React components (e.g., ReportForm.tsx)
-├── public/                 # Static assets
-├── .next/                 # Next.js build output (auto-generated)
-├── package.json            # Project configuration and scripts
-└── README.md               # This file
+├── app/                    # Next.js 13+ app directory
+│   ├── api/               # API routes
+│   ├── (auth)/           # Authentication pages
+│   └── (dashboard)/      # Admin dashboard pages
+├── components/            # Reusable React components
+├── lib/                   # Utility functions and configs
+├── prisma/               # Database schema and migrations
+└── public/               # Static assets
 ```
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request for any significant changes. For major changes, open an issue first to discuss what you would like to change.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions, suggestions, or concerns, please reach out at [your-email@example.com](mailto:your-email@example.com).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
