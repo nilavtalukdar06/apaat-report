@@ -67,6 +67,12 @@ export default function Navbar() {
               <Link href="/dashboard" className={linkClass("/dashboard")}>
                 Admin Panel
               </Link>
+              <Link
+                href="/reveal-identity"
+                className={linkClass("/reveal-identity")}
+              >
+                Reveal Identity
+              </Link>
             </div>
 
             {/* Emergency Button */}

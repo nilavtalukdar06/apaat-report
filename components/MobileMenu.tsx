@@ -76,6 +76,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             >
               Admin Panel
             </Link>
+            <Link
+              href="/reveal-identity"
+              className={linkClass("/reveal-identity")}
+              onClick={onClose}
+            >
+              Reveal Identity
+            </Link>
           </nav>
         </div>
       </div>
