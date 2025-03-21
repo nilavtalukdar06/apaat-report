@@ -50,7 +50,7 @@ export default function PaymentForm() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: amount * 100, // amount in paise
         currency: "INR",
-        name: "Eco Swachh",
+        name: "Apaat Report",
         description: "Donation for supporting us",
         order_id: data.orderId,
         handler: (response: any) => {
