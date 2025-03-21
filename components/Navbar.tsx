@@ -2,13 +2,21 @@
 import Link from "next/link";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const reload = () => {
     window.location.reload();
   };
+
+  // Return a conditional class based on the current pathname
+  const linkClass = (href: string) =>
+    `text-sm transition-colors ${
+      pathname === href ? "text-white" : "text-zinc-400 hover:text-white"
+    }`;
 
   return (
     <>
@@ -36,7 +44,7 @@ export default function Navbar() {
                     />
                   </svg>
                 </div>
-                <span className="text-lg font-semibold text-white max-[400px]:hidden">
+                <span className="text-lg font-semibold text-white max-[460px]:hidden">
                   ApaatReport
                 </span>
               </div>
@@ -46,36 +54,24 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center space-x-6">
               <Link
                 href="/submit-report"
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
+                className={linkClass("/submit-report")}
               >
                 Submit Report
               </Link>
-              <Link
-                href="/track-report"
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
-              >
+              <Link href="/track-report" className={linkClass("/track-report")}>
                 Track Report
               </Link>
-              <Link
-                href="/how-it-works"
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
-              >
+              <Link href="/how-it-works" className={linkClass("/how-it-works")}>
                 How It Works
               </Link>
-              <Link
-                href="/dashboard"
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
-              >
+              <Link href="/dashboard" className={linkClass("/dashboard")}>
                 Admin Panel
               </Link>
             </div>
 
             {/* Emergency Button */}
             <div className="flex items-center space-x-4">
-              <Link
-                href="/"
-                className="hidden lg:block text-sm text-zinc-400 hover:text-white transition-colors"
-              >
+              <Link href="/" className={linkClass("/")}>
                 Home
               </Link>
               <Link href="/donateus">
